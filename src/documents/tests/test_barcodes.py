@@ -867,6 +867,7 @@ class TestBarcode(DirectoriesMixin, TestCase):
 
         doc_barcode_info = barcodes.scan_file_for_barcodes(
             test_file,
+            "application/pdf",
         )
         separator_page_numbers = barcodes.get_separating_barcodes(
             doc_barcode_info.barcodes,
@@ -908,6 +909,7 @@ class TestBarcode(DirectoriesMixin, TestCase):
 
         doc_barcode_info = barcodes.scan_file_for_barcodes(
             test_file,
+            "application/pdf",
         )
         separator_page_numbers = barcodes.get_separating_barcodes(
             doc_barcode_info.barcodes,

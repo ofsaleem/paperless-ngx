@@ -282,7 +282,7 @@ class Consumer(LoggingMixin):
 
     def try_consume_file(
         self,
-        path,
+        path: Path,
         override_filename=None,
         override_title=None,
         override_correspondent_id=None,
@@ -296,7 +296,7 @@ class Consumer(LoggingMixin):
         Return the document object if it was successfully created.
         """
 
-        self.path = Path(path).resolve()
+        self.path = path.resolve()
         self.filename = override_filename or self.path.name
         self.override_title = override_title
         self.override_correspondent_id = override_correspondent_id
