@@ -126,16 +126,16 @@ def get_parser_class_for_mime_type(mime_type: str) -> Optional["DocumentParser"]
 
 
 def run_convert(
-    input_file,
-    output_file,
-    density=None,
-    scale=None,
-    alpha=None,
-    strip=False,
-    trim=False,
-    type=None,
-    depth=None,
-    auto_orient=False,
+    input_file: str,
+    output_file: str,
+    density: Optional[int] = None,
+    scale: Optional[str] = None,
+    alpha: Optional[str] = None,
+    strip: bool = False,
+    trim: bool = False,
+    type: Optional[str] = None,
+    depth: Optional[str] = None,
+    auto_orient: bool = False,
     extra=None,
     logging_group=None,
 ) -> None:

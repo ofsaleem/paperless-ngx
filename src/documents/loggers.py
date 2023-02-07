@@ -1,17 +1,18 @@
 import logging
 import uuid
+from typing import Optional
 
 
 class LoggingMixin:
 
-    logging_group = None
+    logging_group: Optional[uuid.UUID] = None
 
-    logging_name = None
+    logging_name: Optional[str] = None
 
-    def renew_logging_group(self):
+    def renew_logging_group(self) -> None:
         self.logging_group = uuid.uuid4()
 
-    def log(self, level, message, **kwargs):
+    def log(self, level: str, message: str, **kwargs) -> None:
         if self.logging_name:
             logger = logging.getLogger(self.logging_name)
         else:
