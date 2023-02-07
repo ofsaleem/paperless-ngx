@@ -7,6 +7,7 @@ import re
 import tempfile
 from typing import Dict
 from typing import Final
+from typing import List
 from typing import Optional
 from typing import Set
 from typing import Tuple
@@ -70,7 +71,13 @@ def __get_path(key: str, default: str) -> str:
     return os.path.abspath(os.path.normpath(os.environ.get(key, default)))
 
 
-def _parse_redis_url(env_redis: Optional[str]) -> Tuple[str]:
+def __get_list(key: str, sep: str = ",", default: List[str] = list()) -> List[str]:
+    if key in os.environ:
+        return os.environ[key].split(sep)
+    return default
+
+
+def _parse_redis_url(env_redis: Optional[str]) -> Tuple[str, str]:
     """
     Gets the Redis information from the environment or a default and handles
     converting from incompatible django_channels and celery formats.
@@ -205,7 +212,7 @@ SCRATCH_DIR = __get_path(
 # Application Definition                                                      #
 ###############################################################################
 
-env_apps = os.getenv("PAPERLESS_APPS").split(",") if os.getenv("PAPERLESS_APPS") else []
+env_apps = __get_list("PAPERLESS_APPS")
 
 INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
@@ -770,7 +777,7 @@ if TIKA_ENABLED:
 def _parse_ignore_dates(
     env_ignore: str,
     date_order: str = DATE_ORDER,
-) -> Set[datetime.datetime]:
+) -> Set[datetime.date]:
     """
     If the PAPERLESS_IGNORE_DATES environment variable is set, parse the
     user provided string(s) into dates
