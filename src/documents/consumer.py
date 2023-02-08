@@ -296,7 +296,7 @@ class Consumer(LoggingMixin):
         Return the document object if it was successfully created.
         """
 
-        self.path = path.resolve()
+        self.path = Path(path).resolve()
         self.filename = override_filename or self.path.name
         self.override_title = override_title
         self.override_correspondent_id = override_correspondent_id
